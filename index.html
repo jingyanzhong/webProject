@@ -36,11 +36,11 @@
                             <a class="nav-link" href="products.html">飯店資訊</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="user.html">會員中心</a>
+                            <a class="nav-link" href="#">會員中心</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">登入</a>
-                        </li>                        
+                            <a class="nav-link" href="#">登入</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa-regular fa-heart"></i></a>
                         </li>
@@ -91,6 +91,16 @@
     <!-- 找飯店let's go -->
     <section class="main my-5">
         <div class="container">
+            <div class="searchContent row mb-5">
+                <div class="col-12 col-md-8 mx-auto">
+                    <form class="d-flex input-group" role="search">
+                        <input class="form-control" type="search" placeholder="您想住的地區是?" aria-label="Search">
+                        <button class="btn btn-primary text-white">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>                
+            </div>
             <div class="animated row">
                 <div class="col-12 col-md-7 col-lg-8 order-2 order-md-0">
                     <div class="row g-2 g-md-3 mb-2 mb-md-3">
@@ -144,13 +154,13 @@
                 <a href="products.html" class="ms-auto text-decoration-none">看更多</a>
             </div>
             <div class="row mb-4">
-                <div class="col-12 col-md-6 mb-4">
+                <div class="col-12 col-md-6 mb-4 mb-md-0">
                     <div class="hotImg position-relative">
                         <div class="imgText position-absolute">
                             <h3>中正區</h3>
                         </div>
                         <img src="img/hot (1).jpg" alt="">
-                    </div>                 
+                    </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="hotImg position-relative">
@@ -158,7 +168,7 @@
                             <h3>信義區</h3>
                         </div>
                         <img src="img/hot (2).jpg" alt="">
-                    </div>                 
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -168,7 +178,7 @@
                             <h3>大安區</h3>
                         </div>
                         <img src="img/hot (3).jpg" alt="">
-                    </div>                 
+                    </div>
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="hotImg position-relative">
@@ -176,7 +186,7 @@
                             <h3>中山區</h3>
                         </div>
                         <img src="img/hot (4).jpg" alt="">
-                    </div>                 
+                    </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="hotImg position-relative">
@@ -184,11 +194,11 @@
                             <h3>萬華區</h3>
                         </div>
                         <img src="img/hot (5).jpg" alt="">
-                    </div>                 
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     </section>
     <footer class="bg-secondary py-5">
         <div class="container">
@@ -198,7 +208,8 @@
                     <p class="mb-0">地址：106台北市忠孝東路4段xxx號18樓</p>
                     <a href="tel:+886-2-12345678" class="text-dark text-decoration-none">電話：(02)1234-5678</a>
                     <div class="icon fs-4">
-                        <a href="#" class="d-inline-block me-3 text-dark"><i class="fa-brands fa-square-facebook"></i></a>
+                        <a href="#" class="d-inline-block me-3 text-dark"><i
+                                class="fa-brands fa-square-facebook"></i></a>
                         <a href="#" class="d-inline-block me-3 text-dark"><i class="fa-brands fa-instagram"></i></a>
                         <a href="#" class="d-inline-block me-3 text-dark"><i class="fa-brands fa-twitter"></i></a>
                     </div>
@@ -218,8 +229,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="js/data.js"></script> -->
     <script src="js/all.js"></script>
 </body>
 
