@@ -15,8 +15,8 @@ $(document).ready(function () {
     })
 });
 
-const zoneSelect = document.getElementById('zoneSelect');
-const zoneBtn = document.getElementById('zoneBtn');
+const townSelect = document.getElementById('townSelect');
+const townBtn = document.getElementById('townBtn');
 const productTitle = document.getElementById('productTitle');
 const productsContent = document.getElementById('productsContent');
 const cardBtn = document.getElementById('cardBtn');
@@ -52,7 +52,7 @@ function showOptions(){
     allTown.forEach(function(item){
         str += `<option value="${item}">${item}</option>`
     })
-    zoneSelect.innerHTML = str ;
+    townSelect.innerHTML = str ;
 }
 
 // 顯示行政區名稱
@@ -79,11 +79,11 @@ function showList(town,hotel,star,page){
             
         }else if(hotel == 'b_b'){
             if(star == ''){
-                if(item.Town === town && (item.Class == 3 || item.Class == 4 || item.Class == 5)){
+                if(item.Town === town && (item.Class == 3 || item.Class == 4)){
                     return item
                 }
             }else{
-                if(item.Town === town && (item.Class == 3 || item.Class == 4 || item.Class == 5) && (item.Grade == star[0] || item.Grade == star[1] ||item.Grade == star[2])){
+                if(item.Town === town && (item.Class == 3 || item.Class == 4) && (item.Grade == star[0] || item.Grade == star[1] ||item.Grade == star[2])){
                     return item
                 }
             }
@@ -96,7 +96,7 @@ function showList(town,hotel,star,page){
         //     return item
         // }
     })
-    console.log(cacheData);
+    // console.log(cacheData);
 
     const cacheDataLen = cacheData.length;
     let totalPage = Math.ceil(cacheDataLen / 18);
@@ -106,6 +106,10 @@ function showList(town,hotel,star,page){
     
     if(cacheData == ''){
         alert('找不到相符的資料，請重新搜尋');
+        productsContent.innerHTML = '';
+        productTitle.textContent = '尚未選擇行政區';
+        pagination.innerHTML = '';
+        getDistricts();
         return
     }else{
         if(page == totalPage){
@@ -138,7 +142,7 @@ function showList(town,hotel,star,page){
                         <p class="text-primary" id="starIcon">${starStr}</p>
                         <p class="card-text">${cacheData[i].Add}</p>
                     </div>
-                    <a href="productsItem.html" class="cardBtn btn btn-primary py-3 w-100 rounded-0" data-id="${i}">查看詳細資訊</a>
+                    <button type="button" class="cardBtn btn btn-primary py-3 w-100 rounded-0" data-id="${i}" data-model="0" data-bs-toggle="modal" data-bs-target="#exampleModal">查看詳細資訊</button>
                 </div>
             </div>`
             }
@@ -171,7 +175,7 @@ function showList(town,hotel,star,page){
                         <p class="text-primary" id="starIcon">${starStr}</p>
                         <p class="card-text">${cacheData[i].Add}</p>
                     </div>
-                    <a href="productsItem.html" class="cardBtn btn btn-primary py-3 w-100 rounded-0" data-id="${i}">查看詳細資訊</a>
+                    <button type="button" class="cardBtn btn btn-primary py-3 w-100 rounded-0" data-id="${i}" data-model="0" data-bs-toggle="modal" data-bs-target="#exampleModal">查看詳細資訊</button>
                 </div>
             </div>`
             }
@@ -211,36 +215,25 @@ function showPage(page,totalPage){
     pagination.innerHTML = str;
 }
 
-function saveData(nowData,cacheData){
-    let newData;
-    cacheData.forEach(function(item,index){
-        if(index == nowData){
-            newData.push(item)
-        }
-    })
-    console.log(newData);
-    let newStr = JSON.stringify(newData);
-    sessionStorage.setItem('nowData', newStr);
-}
 
 // 監聽事件
-zoneBtn.addEventListener('click', function (e) {
+townBtn.addEventListener('click', function (e) {
     e.preventDefault();
     starValue = [];
     hotelValue = [];
-    if(zoneSelect.value == '請選擇行政區'){
+    if(townSelect.value == '請選擇行政區'){
         alert('請選擇行政區');
         return
     }
-    townValue = zoneSelect.value;
-    console.log(townValue);
+    townValue = townSelect.value;
+    // console.log(townValue);
     // 取出住宿類型的值
     house.forEach(function (item) {
         if (item.checked === true) {
             hotelValue = item.value;
         }
     })
-    console.log(hotelValue);
+    // console.log(hotelValue);
 
     // 取出星級checkbox的值
     star.forEach(function (item) {
@@ -248,9 +241,9 @@ zoneBtn.addEventListener('click', function (e) {
             starValue.push(item.value);            
         }
     })
-    console.log(starValue);
+    // console.log(starValue);
 
-    showTitle(zoneSelect.value);
+    showTitle(townSelect.value);
     showList(townValue,hotelValue,starValue,1);
 })
 
@@ -265,29 +258,85 @@ pagination.addEventListener("click",function(e){
 
 productsContent.addEventListener("click",function(e){
     // 儲存點選的card的data-id
-    let nowData ;
-    if(e.target.nodeName !== 'A'){
+    let dataId ;
+    if(e.target.nodeName !== 'BUTTON'){
         return
     }else{
-        nowData = e.target.dataset.id;
+        dataId = e.target.dataset.id;
     }
     // 儲存點擊到的飯店資訊
-    let newData = [];
+    let nowData = [];
     cacheData.forEach(function(item,index){
-        if(index == nowData){
-            newData.push(item)
+        if(index == dataId){
+            nowData = item;
         }
     })
-    // 轉成純字串並放入sessionStorage
-    let newStr = JSON.stringify(newData);
-    sessionStorage.removeItem('nowData');
-    sessionStorage.setItem('nowData', newStr);
-})
+    // console.log(nowData.Name);
 
-// let productItemData = sessionStorage.setItem('nowData') ;
-// if(productItemData !== ''){
-//     productItem();
-// }
-// function productItem(){
-//     console.log(productItemData);
-// }
+    // 在model上顯示飯店資訊
+    const modalBody = document.getElementById('modal-body');
+    let starStr = '' ;
+    let photo = '' ;
+    // 判斷星級
+    if(nowData.Grade == 3){
+        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+    }else if(nowData.Grade == 4){
+        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+    }else if (nowData.Grade == 5){
+        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+    }else{
+        starStr = '';
+    }
+    // 如果沒照片的話,加上img內的圖
+    if(nowData.Picture1 == ''){
+        photo = `img/pic_icon.jpg`
+    }else{
+        photo = `${nowData.Picture1}`
+    }
+    // 要顯示的html
+    let modelStr = `
+    <div class="row mb-4">
+        <div class="col-12 col-lg-7 mb-3 mb-lg-0">
+            <img class="productImg" src="${photo}" alt="${nowData.Name}">
+        </div>
+        <div class="col-12 col-lg-5">
+            <h3 class="fw-bold">${nowData.Name}</h3>
+            <p class="text-primary">
+                ${starStr}
+            </p>
+            <p class="mb-3">${nowData.Add}</p>
+            <p class="gray">${nowData.Description}
+            </p>
+            <p>
+                最低價：${nowData.LowestPrice}起
+            </p>
+            <button class="btn btn-primary fw-bold">立即訂房</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="productInfo bg-primary text-center">
+                <img class="productIcon mx-auto mb-3" src="img/icon01.png" alt="icon01">
+                <h5>停車資訊</h5>
+                <p>${nowData.Parkinginfo}</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="productInfo bg-primary text-center">
+                <img class="productIcon mx-auto mb-3" src="img/icon02.png" alt="icon01">
+                <h5>服務設施</h5>
+                <p>${nowData.Serviceinfo}</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="productInfo bg-primary text-center">
+                <img class="productIcon mx-auto mb-3" src="img/icon03.png" alt="icon01">
+                <h5>聯絡資訊</h5>
+                <p class="mb-2">${nowData.Tel}</p>
+                <p>${nowData.IndustryEmail}</p>
+            </div>
+        </div>
+    </div>`;
+    modalBody.innerHTML = modelStr ;
+
+})
