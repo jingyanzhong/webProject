@@ -11361,8 +11361,8 @@ img {
     height: 240px;
   }
 }
-.wapperBody header {
-  height: 88px;
+.login {
+  margin-top: 88px;
 }
 
 .loginContent {
@@ -11387,12 +11387,7 @@ img {
   border-radius: 22px;
 }
 
-@media (min-width: 820px) {
-  .wapperBody header {
-    height: 94px;
-  }
-}
-@media (min-width: 376px) {
+@media (min-width: 375px) {
   .wapperHtml, .wapperBody {
     height: 100%;
     margin: 0;
@@ -11401,7 +11396,7 @@ img {
     display: flex;
     flex-direction: column;
   }
-  .login {
+  .login, .foreverList {
     flex-grow: 1;
   }
 }
