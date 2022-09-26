@@ -11086,12 +11086,15 @@ img {
 }
 .banner .carousel-text h5, .banner .carousel-text .h5 {
   font-size: 36px;
+  text-shadow: 0 0 8px #000;
 }
 .banner .carousel-text h3, .banner .carousel-text .h3 {
   font-size: 64px;
+  text-shadow: 0 0 8px #000;
 }
 .banner .carousel-text p {
   font-size: 48px;
+  text-shadow: 0 0 8px #000;
 }
 
 @-webkit-keyframes hero_text_move {
