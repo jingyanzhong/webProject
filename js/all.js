@@ -269,7 +269,7 @@ productsContent.addEventListener("click",function(e){
     // console.log(e.target.nodeName)
     if(e.target.nodeName == 'BUTTON'){
         dataId = e.target.dataset.id;
-        console.log(dataId);
+        // console.log(dataId);
         modelShow();
     }else if(e.target.nodeName == 'I'){
         dataNum = e.target.dataset.num;
