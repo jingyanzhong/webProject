@@ -11425,13 +11425,14 @@ img {
   margin-top: 136px;
   flex-grow: 1;
 }
-
-.userListContent {
-  border: 1px solid #C19B76;
-  border-top: 0;
+.user .userInfoBtn {
+  color: #C19B76;
 }
-.userListContent tr, .userListContent td {
-  padding: 4px 16px;
+.user .userInfoBtn:hover, .user .userInfoBtn.active {
+  color: #fff;
+}
+.user .border-bottom-0 {
+  border-bottom: 0;
 }
 
 .userList {

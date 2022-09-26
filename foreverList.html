@@ -56,7 +56,7 @@
                     <h3 class="fw-bold text-center">最愛清單</h3>
                 </div>
             </div>
-            <div class="row g-0">
+            <div class="row g-0" id="foreverListContent">
                 <div class="col-12 col-md-10 col-lg-8 shadow  mx-md-auto mb-4 position-relative">
                     <div class="colse position-absolute">
                         <i class="fa-solid fa-xmark"></i>
@@ -140,7 +140,21 @@
                 </div>
             </div>
         </div>
-
+        <!-- model -->
+        <div id="model">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body productItem" id="modal-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <footer class="bg-secondary py-5">
         <div class="container">
@@ -177,7 +191,7 @@
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="js/data.js"></script> -->
-    <script src="js/all.js"></script>
+    <script src="js/foreverList.js"></script>
 
     <!-- <script>
         (() => {

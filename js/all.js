@@ -13,6 +13,11 @@ $(document).ready(function () {
               };
         })
     })
+    $('.userInfoBtn').on("click",function(){
+        $(this).toggleClass('active');
+        $(this).parent().siblings().find('a').removeClass('active');
+        $(this).parent().siblings('.collapse').removeClass('show');
+    })
 });
 
 const townSelect = document.getElementById('townSelect');
@@ -32,6 +37,7 @@ let allTown = [];
 let starValue = [];
 let hotelValue = [];
 let townValue ;
+const foreverData = JSON.parse(localStorage.getItem('foreverData')) || [];
 
 getDistricts();
 // 篩選出行政區
@@ -134,7 +140,7 @@ function showList(town,hotel,star,page){
                 str += `<div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card rounded-0">
                     <div class="heartIcon">
-                        <i class="far fa-heart text-white" id="heart"></i>
+                        <i class="icon far fa-heart text-white" id="heart" data-num="${i}"></i>
                     </div>
                     <img src="${photo}" class="card-img-top rounded-0" alt="hotel01" height="335px">
                     <div class="card-body">
@@ -167,7 +173,7 @@ function showList(town,hotel,star,page){
                 str += `<div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card rounded-0">
                     <div class="heartIcon">
-                        <i class="far fa-heart text-white" id="heart"></i>
+                        <i class="icon far fa-heart text-white" id="heart" data-num="${i}"></i>
                     </div>
                     <img src="${photo}" class="card-img-top rounded-0" alt="hotel01" height="335px">
                     <div class="card-body">
@@ -259,12 +265,21 @@ pagination.addEventListener("click",function(e){
 productsContent.addEventListener("click",function(e){
     // 儲存點選的card的data-id
     let dataId ;
-    if(e.target.nodeName !== 'BUTTON'){
-        return
-    }else{
+    let dataNum ;
+    // console.log(e.target.nodeName)
+    if(e.target.nodeName == 'BUTTON'){
         dataId = e.target.dataset.id;
+        console.log(dataId);
+        modelShow();
+    }else if(e.target.nodeName == 'I'){
+        dataNum = e.target.dataset.num;
+        // console.log(dataNum);
+        heartIcon();
+    }else{
+        return
     }
-    // 儲存點擊到的飯店資訊
+    function modelShow(){
+        // 儲存點擊到的飯店資訊
     let nowData = [];
     cacheData.forEach(function(item,index){
         if(index == dataId){
@@ -338,5 +353,25 @@ productsContent.addEventListener("click",function(e){
         </div>
     </div>`;
     modalBody.innerHTML = modelStr ;
-
+    }
+    function heartIcon(){
+        const icon = document.querySelectorAll('.icon');
+        
+        // console.log(typeof icon , icon[1])
+        icon.forEach(function(item,index){
+            // console.log(icon[index],dataNum)
+            if(dataNum == index){
+                console.log(item)
+                item.classList.add("active");
+            }
+        })
+        cacheData.forEach(function(item,index){
+            if(dataNum == index){
+                foreverData.push(item);
+            }
+        })
+        console.log(foreverData)
+        const newDataStr = JSON.stringify(foreverData);
+        localStorage.setItem("foreverData",newDataStr);
+    }
 })
