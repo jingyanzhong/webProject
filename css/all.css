@@ -11302,6 +11302,9 @@ img {
   right: 16px;
   cursor: pointer;
 }
+.productMain .card .heartIcon .fa-heart {
+  text-shadow: 0 0 4px #000;
+}
 .productMain .card .heartIcon .fa-heart:hover, .productMain .card .heartIcon .fa-heart.active {
   font-weight: bold;
 }
