@@ -11300,6 +11300,7 @@ img {
   position: absolute;
   top: 16px;
   right: 16px;
+  cursor: pointer;
 }
 .productMain .card .heartIcon .fa-heart:hover, .productMain .card .heartIcon .fa-heart.active {
   font-weight: bold;
