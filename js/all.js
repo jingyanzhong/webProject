@@ -361,7 +361,7 @@ productsContent.addEventListener("click",function(e){
         icon.forEach(function(item,index){
             // console.log(icon[index],dataNum)
             if(dataNum == index){
-                console.log(item)
+                // console.log(item)
                 item.classList.add("active");
             }
         })
@@ -370,7 +370,7 @@ productsContent.addEventListener("click",function(e){
                 foreverData.push(item);
             }
         })
-        console.log(foreverData)
+        // console.log(foreverData)
         const newDataStr = JSON.stringify(foreverData);
         localStorage.setItem("foreverData",newDataStr);
     }
