@@ -11168,6 +11168,10 @@ img {
      object-position: center center;
 }
 
+.searchContent button {
+  border-radius: 19px;
+}
+
 .hot .hotImg {
   overflow: hidden;
 }
