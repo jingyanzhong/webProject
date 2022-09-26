@@ -59,11 +59,11 @@ foreverContent.addEventListener("click",function(e){
     let dataDel ;
     if(e.target.nodeName == 'BUTTON'){
         dataId = e.target.dataset.id;
-        console.log(dataId);
+        // console.log(dataId);
         showList(dataId);
     }else if(e.target.nodeName == 'I'){
         dataDel = e.target.dataset.del;
-        console.log(dataDel);
+        // console.log(dataDel);
         foreverListData.splice(dataDel,1);
         foreverListShow();
         const newDataStr = JSON.stringify(foreverListData);
