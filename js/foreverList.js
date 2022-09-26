@@ -7,6 +7,9 @@ function foreverListShow(){
     let str = '';
     let starStr = '';
     let photo = '';
+    if(foreverListData == ''){
+        foreverContent.innerHTML = '';
+    }
 
     foreverListData.forEach(function(item,index){
         if(item.Grade == 3){
@@ -62,10 +65,10 @@ foreverContent.addEventListener("click",function(e){
         dataDel = e.target.dataset.del;
         console.log(dataDel);
         foreverListData.splice(dataDel,1);
-
+        foreverListShow();
         const newDataStr = JSON.stringify(foreverListData);
         localStorage.setItem("foreverData",newDataStr);
-        foreverListShow();
+        
     }
 })
 
