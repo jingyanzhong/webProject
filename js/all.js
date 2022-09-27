@@ -1,18 +1,4 @@
 $(document).ready(function () {
-    // 首頁動畫效果
-    $(window).scroll(function(){
-        let scrollPos = $(window).scrollTop();
-        let windowHeight = $(window).height();
-        // console.log(scrollPos,windowHeight);
-        $('.animated').each(function(){
-            let thisPos = $(this).offset().top;
-            // console.log(thisPos);
-            if((windowHeight + scrollPos) >= thisPos){
-                // console.log('位置到了')
-                $(this).addClass('fadeIn');
-              };
-        })
-    })
     $('.userInfoBtn').on("click",function(){
         $(this).toggleClass('active');
         $(this).parent().siblings().find('a').removeClass('active');

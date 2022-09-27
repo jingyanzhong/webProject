@@ -27,7 +27,7 @@ function foreverListShow(){
         }else{
             photo = `${item.Picture1}`
         }
-        str += `<div class="col-12 col-md-10 col-lg-8 shadow  mx-md-auto mb-4 position-relative">
+        str += `<div class="col-12 col-md-10 col-lg-8 shadow  mx-md-auto mb-4 position-relative" data-aos="fade-up" data-aos-duration="1000">
         <div class="colse position-absolute">
             <i class="fa-solid fa-xmark" data-del="${index}"></i>
         </div>
