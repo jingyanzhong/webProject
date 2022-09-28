@@ -29,7 +29,7 @@ function foreverListShow(){
         }
         str += `<div class="col-12 col-md-10 col-lg-8 shadow  mx-md-auto mb-4 position-relative" data-aos="fade-up" data-aos-duration="1000">
         <div class="colse position-absolute">
-            <i class="fa-solid fa-xmark" data-del="${index}"></i>
+            <i class="fa-solid fa-xmark p-3" data-del="${index}"></i>
         </div>
         <div class="row g-0">
             <div class="col-12 col-md-6 col-lg-7">
