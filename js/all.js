@@ -222,6 +222,7 @@ townBtn.addEventListener('click', function (e) {
     e.preventDefault();
     starValue = [];
     hotelValue = [];
+    nowPage = '';
     if(townSelect.value == '請選擇行政區'){
         alert('請選擇行政區');
         return
@@ -235,7 +236,6 @@ townBtn.addEventListener('click', function (e) {
         }
     })
     // console.log(hotelValue);
-
     // 取出星級checkbox的值
     star.forEach(function (item) {
         if (item.checked === true) {
@@ -243,7 +243,6 @@ townBtn.addEventListener('click', function (e) {
         }
     })
     // console.log(starValue);
-
     showTitle(townSelect.value);
     showList(townValue,hotelValue,starValue,1);
 })
