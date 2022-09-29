@@ -25,6 +25,8 @@ let allTown = [];
 let starValue = [];
 let hotelValue = [];
 let townValue ;
+let nowPage;
+
 const foreverData = JSON.parse(localStorage.getItem('foreverData')) || [];
 
 getDistricts();
@@ -251,7 +253,7 @@ pagination.addEventListener("click",function(e){
     if(e.target.nodeName !== 'A'){
         return
     }
-    let nowPage = e.target.dataset.page;
+    nowPage = e.target.dataset.page;
     showList(townValue,hotelValue,starValue,nowPage);
 })
 
@@ -263,108 +265,105 @@ productsContent.addEventListener("click",function(e){
     if(e.target.nodeName == 'BUTTON'){
         dataId = e.target.dataset.id;
         // console.log(dataId);
-        modelShow();
+        modelShow(dataId);
     }else if(e.target.nodeName == 'I'){
         dataNum = e.target.dataset.num;
         // console.log(dataNum);
-        heartIcon();
+        heartIcon(dataNum,nowPage);
     }else{
         return
     }
-    function modelShow(){
-        // 儲存點擊到的飯店資訊
-    let nowData = [];
-    cacheData.forEach(function(item,index){
-        if(index == dataId){
-            nowData = item;
-        }
-    })
-    // console.log(nowData.Name);
-
-    // 在model上顯示飯店資訊
-    const modalBody = document.getElementById('modal-body');
-    let starStr = '' ;
-    let photo = '' ;
-    // 判斷星級
-    if(nowData.Grade == 3){
-        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
-    }else if(nowData.Grade == 4){
-        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
-    }else if (nowData.Grade == 5){
-        starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
-    }else{
-        starStr = '';
-    }
-    // 如果沒照片的話,加上img內的圖
-    if(nowData.Picture1 == ''){
-        photo = `img/pic_icon.jpg`
-    }else{
-        photo = `${nowData.Picture1}`
-    }
-    // 要顯示的html
-    let modelStr = `
-    <div class="row mb-4">
-        <div class="col-12 col-lg-7 mb-3 mb-lg-0">
-            <img class="productImg" src="${photo}" alt="${nowData.Name}">
-        </div>
-        <div class="col-12 col-lg-5">
-            <h3 class="fw-bold">${nowData.Name}</h3>
-            <p class="text-primary">
-                ${starStr}
-            </p>
-            <p class="mb-3">${nowData.Add}</p>
-            <p class="gray">${nowData.Description}
-            </p>
-            <p>
-                最低價：${nowData.LowestPrice}起
-            </p>
-            <button class="btn btn-primary fw-bold">立即訂房</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
-            <div class="productInfo bg-primary text-center">
-                <img class="productIcon mx-auto mb-3" src="img/icon01.png" alt="icon01">
-                <h5>停車資訊</h5>
-                <p>${nowData.Parkinginfo}</p>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
-            <div class="productInfo bg-primary text-center">
-                <img class="productIcon mx-auto mb-3" src="img/icon02.png" alt="icon01">
-                <h5>服務設施</h5>
-                <p>${nowData.Serviceinfo}</p>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mb-4 mb-lg-0">
-            <div class="productInfo bg-primary text-center">
-                <img class="productIcon mx-auto mb-3" src="img/icon03.png" alt="icon01">
-                <h5>聯絡資訊</h5>
-                <p class="mb-2">${nowData.Tel}</p>
-                <p>${nowData.IndustryEmail}</p>
-            </div>
-        </div>
-    </div>`;
-    modalBody.innerHTML = modelStr ;
-    }
-    function heartIcon(){
-        const icon = document.querySelectorAll('.icon');
-        
-        // console.log(typeof icon , icon[1])
-        icon.forEach(function(item,index){
-            // console.log(icon[index],dataNum)
-            if(dataNum == index){
-                // console.log(item)
-                item.classList.add("active");
-            }
-        })
-        cacheData.forEach(function(item,index){
-            if(dataNum == index){
-                foreverData.push(item);
-            }
-        })
-        // console.log(foreverData)
-        const newDataStr = JSON.stringify(foreverData);
-        localStorage.setItem("foreverData",newDataStr);
+})
+function modelShow(id){
+    // 儲存點擊到的飯店資訊
+let nowData = [];
+cacheData.forEach(function(item,index){
+    if(index == id){
+        nowData = item;
     }
 })
+// console.log(nowData.Name);
+
+// 在model上顯示飯店資訊
+const modalBody = document.getElementById('modal-body');
+let starStr = '' ;
+let photo = '' ;
+// 判斷星級
+if(nowData.Grade == 3){
+    starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+}else if(nowData.Grade == 4){
+    starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+}else if (nowData.Grade == 5){
+    starStr = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`
+}else{
+    starStr = '';
+}
+// 如果沒照片的話,加上img內的圖
+if(nowData.Picture1 == ''){
+    photo = `img/pic_icon.jpg`
+}else{
+    photo = `${nowData.Picture1}`
+}
+// 要顯示的html
+let modelStr = `
+<div class="row mb-4">
+    <div class="col-12 col-lg-7 mb-3 mb-lg-0">
+        <img class="productImg" src="${photo}" alt="${nowData.Name}">
+    </div>
+    <div class="col-12 col-lg-5">
+        <h3 class="fw-bold">${nowData.Name}</h3>
+        <p class="text-primary">
+            ${starStr}
+        </p>
+        <p class="mb-3">${nowData.Add}</p>
+        <p class="gray">${nowData.Description}
+        </p>
+        <p>
+            最低價：${nowData.LowestPrice}起
+        </p>
+        <button class="btn btn-primary fw-bold">立即訂房</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="productInfo bg-primary text-center">
+            <img class="productIcon mx-auto mb-3" src="img/icon01.png" alt="icon01">
+            <h5>停車資訊</h5>
+            <p>${nowData.Parkinginfo}</p>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="productInfo bg-primary text-center">
+            <img class="productIcon mx-auto mb-3" src="img/icon02.png" alt="icon01">
+            <h5>服務設施</h5>
+            <p>${nowData.Serviceinfo}</p>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="productInfo bg-primary text-center">
+            <img class="productIcon mx-auto mb-3" src="img/icon03.png" alt="icon01">
+            <h5>聯絡資訊</h5>
+            <p class="mb-2">${nowData.Tel}</p>
+            <p>${nowData.IndustryEmail}</p>
+        </div>
+    </div>
+</div>`;
+modalBody.innerHTML = modelStr ;
+}
+function heartIcon(num,page){
+    let pageNum = page || 1 ;
+    const icon = document.querySelectorAll('.icon');
+    // console.log(typeof icon , icon[1])
+    icon.forEach(function(item,index){
+        if((num-(18*(pageNum-1))) == index){
+            item.classList.add("active");
+        }
+    })
+    cacheData.forEach(function(item,index){
+        if(num == index){
+            foreverData.push(item);
+        }
+    })
+    const newDataStr = JSON.stringify(foreverData);
+    localStorage.setItem("foreverData",newDataStr);
+}
